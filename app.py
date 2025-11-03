@@ -5,6 +5,28 @@ import pandas as pd
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import os
+
+# ----------------------------
+# Ensure artificats folder exists
+# ----------------------------
+os.makedirs("artificats", exist_ok=True)
+
+# ----------------------------
+# Download large files if missing
+# ----------------------------
+def download_file(url, local_path):
+    if not os.path.exists(local_path):
+        r = requests.get(url)
+        with open(local_path, "wb") as f:
+            f.write(r.content)
+
+# Replace these URLs with your own uploaded files (GitHub, Google Drive, or S3)
+MOVIE_LIST_URL = "https://raw.githubusercontent.com/Akanksha25300/movie-recommender-system/main/artificats/movie_list.pkl"
+SIMILARITY_URL = "https://raw.githubusercontent.com/Akanksha25300/movie-recommender-system/main/artificats/similarity.pkl"
+
+download_file(MOVIE_LIST_URL, "artificats/movie_list.pkl")
+download_file(SIMILARITY_URL, "artificats/similarity.pkl")
 
 # ----------------------------
 # Load pickled data
@@ -50,7 +72,6 @@ def recommend_movie(movie_title):
         recommended_posters.append(fetch_poster(movie_id))
 
     return recommended_movies, recommended_posters
-
 
 # ----------------------------
 # UI
