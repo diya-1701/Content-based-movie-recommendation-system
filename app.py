@@ -25,6 +25,7 @@ def download_file(url, local_path):
 MOVIE_LIST_URL = "https://drive.google.com/uc?export=download&id=19y2krbrr0FvgXmz7_2LrILgr2AMR5S8E"
 SIMILARITY_URL = "https://drive.google.com/uc?export=download&id=1GjoJsDhAwnohT-mV8G7eUamYjcjTIwaR"
 
+
 download_file(MOVIE_LIST_URL, "artificats/movie_list.pkl")
 download_file(SIMILARITY_URL, "artificats/similarity.pkl")
 
