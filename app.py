@@ -8,6 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 # ----------------------------
 # Load pickled data from local artificats folder
 # ----------------------------
+# ⚡ Tiny Git change: added a harmless comment
+# This line is just to force Git to detect a change
 with open('artificats/movie_list.pkl', 'rb') as f:
     movies = pickle.load(f)
 
