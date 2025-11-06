@@ -4,20 +4,17 @@ import pandas as pd
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import os
 
 # ----------------------------
-# Load pickled data from local artificats folder with caching
+# Load pickled data from local artificats folder
 # ----------------------------
-@st.cache_data
-def load_data():
-    with open('artificats/movie_list.pkl', 'rb') as f:
-        movies = pickle.load(f)
-    with open('artificats/similarity.pkl', 'rb') as f:
-        similarity = pickle.load(f)
-    return movies, similarity
+# ⚡ Tiny Git change: added a harmless comment
+# This line is just to force Git to detect a change
+with open('artificats/movie_list.pkl', 'rb') as f:
+    movies = pickle.load(f)
 
-movies, similarity = load_data()
+with open('artificats/similarity.pkl', 'rb') as f:
+    similarity = pickle.load(f)
 
 # Pre-calc TF-IDF for description based search
 tfidf = TfidfVectorizer(stop_words='english')
@@ -27,9 +24,8 @@ tfidf_matrix = tfidf.fit_transform(movies['tags'])
 TMDB_API_KEY = "8265bd1679663a7ea12ac168da84d2e8"
 
 # ----------------------------
-# Fetch Poster Utility with caching
+# Fetch Poster Utility
 # ----------------------------
-@st.cache_data
 def fetch_poster(movie_id):
     try:
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US"
